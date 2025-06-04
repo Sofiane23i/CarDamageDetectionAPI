@@ -9,6 +9,9 @@ import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use('Agg')  # Use non-interactive backend for matplotlib
 
+
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
 # Root paths
 ROOT_DIR = os.path.abspath(".")
 MODEL_DIR = os.path.join(ROOT_DIR, "weights")
