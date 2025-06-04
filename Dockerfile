@@ -1,20 +1,45 @@
-# Use a base image with Python 3.6
-FROM python:3.6.13
+# Use official Python image
+FROM python:3.8-slim
 
-# Set working directory
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    git \
+    curl \
+    wget \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libglib2.0-0 \
+    libgl1-mesa-glx \
+    libopencv-dev \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set work directory
 WORKDIR /app
 
-# Copy requirements and install them
-COPY requirements.txt .
-RUN pip install --upgrade pip && pip install -r requirements.txt
+# Copy code
+COPY . /app
 
-# Go back to app
-WORKDIR /app
+# Install Python dependencies
+RUN pip install --upgrade pip
 
-# Copy your code
-COPY . .
+# Install project dependencies
+RUN pip install -r requirements.txt
 
-# Expose Flask port
+# Install Mask R-CNN (Matterport)
+RUN git clone https://github.com/matterport/Mask_RCNN.git && \
+    cd Mask_RCNN && \
+    pip install -r requirements.txt && \
+    python setup.py install && \
+    cd .. && rm -rf Mask_RCNN
+
+# Expose Flask default port
 EXPOSE 5000
 
 # Run Flask app
