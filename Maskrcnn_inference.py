@@ -1,6 +1,7 @@
 """
 Mask‑R‑CNN inference service
 ----------------------------
+
 • POST /api/predict  – multipart *or* JSON body
       accepted payloads
       ────────────────────────────────────────────────────
