@@ -7,6 +7,7 @@ To call the API, start by running the Mask R-CNN Flask server on the first machi
 Then, from a second machine where the test vehicle images are located, call the Flask server using either the curl command or the Python script maskrcnn_api_call.py.
 Don’t forget to update the IP address or domain name of the Flask server in the API call.
 
+```python
 import json, base64, requests
 with open("../car2.jpg", "rb") as f:
     payload = {
