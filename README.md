@@ -1,12 +1,6 @@
-# CarDamageDetectionAPI
-
-Download weights file from https://drive.google.com/file/d/1RGL8Ojk93fnmbwYHrUkEsHCX1woIYa3J/view?usp=sharing and move it inside weigths folder
-
-
-
 # Mask‑R‑CNN Car‑Damage Inference API
 
-![Python version](https://img.shields.io/badge/python-3.8+-blue)
+![Python version](https://img.shields.io/badge/python-3.6+-blue)
 
 A lightweight Flask micro‑service that exposes a Mask‑R‑CNN model trained for car‑damage inspection (**broken part, crack, dent, lamp broken, missing part, scratch**).
 
@@ -34,6 +28,7 @@ $ python3 -m venv venv && source venv/bin/activate
 $ pip install -r requirements.txt
 
 # 2. Download your trained weights ↴
+Download weights file from https://drive.google.com/file/d/1RGL8Ojk93fnmbwYHrUkEsHCX1woIYa3J/view?usp=sharing and move it inside weigths folder
 $ mkdir -p weights && mv mask_rcnn_car_damage.h5 weights/
 
 # 3. Run the service
@@ -139,24 +134,8 @@ To tweak thresholds, open **`api.py` → `InferenceConfig`**.
 
 ## 📝 License
 
-MIT © 2025 Your Name
+MIT © 2025 SpidR
 
-
-# CarDamageDetectionAPI Call 
-To call the API, start by running the Mask R-CNN Flask server on the first machine.
-Then, from a second machine where the test vehicle images are located, call the Flask server using either the curl command or the Python script maskrcnn_api_call.py.
-Don’t forget to update the IP address or domain name of the Flask server in the API call.
-
-```python
-import json, base64, requests
-with open("../car2.jpg", "rb") as f:
-    payload = {
-        "image": base64.b64encode(f.read()).decode(),
-        "return_image": False
-    }
-r = requests.post("http://ip_adress:5000/api/predict",
-                  json=payload, timeout=120)
-print(json.dumps(r.json(), indent=2))
 
 
 
