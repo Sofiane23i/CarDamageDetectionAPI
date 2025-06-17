@@ -38,7 +38,7 @@ Docker fan?
 
 ```bash
 $ docker build -t car-damage-api .
-$ docker run -p 5000:5000 car-damage-api
+$ docker run -p 5000:5000 -v /absolute/path/to/images:/data car-damage-api   (for api call get paramteres)
 ```
 
 ---
