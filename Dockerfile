@@ -43,5 +43,5 @@ RUN pip install -r requirements.txt
 EXPOSE 5000
 
 # Run Flask app
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "Maskrcnn_inference:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "api:app"]
 

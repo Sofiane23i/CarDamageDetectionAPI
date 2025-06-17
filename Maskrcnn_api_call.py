@@ -11,3 +11,5 @@ with open("../car2.jpg", "rb") as f:
 r = requests.post("http://192.168.112.56:5000/api/predict",
                   json=payload, timeout=120)
 print(json.dumps(r.json(), indent=2))
+
+
