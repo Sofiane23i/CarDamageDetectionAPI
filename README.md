@@ -19,7 +19,7 @@ A lightweight Flask micro‑service that exposes a Mask‑R‑CNN model trained 
 ---
 
 ## 🚀 Quick Start
-
+Download weights file from https://drive.google.com/file/d/1RGL8Ojk93fnmbwYHrUkEsHCX1woIYa3J/view?usp=sharing and move it inside weigths folder
 ```bash
 # 1. Clone & install deps
 $ git clone https://github.com/your‑org/car‑damage‑api.git
@@ -28,7 +28,6 @@ $ python3 -m venv venv && source venv/bin/activate
 $ pip install -r requirements.txt
 
 # 2. Download your trained weights ↴
-Download weights file from https://drive.google.com/file/d/1RGL8Ojk93fnmbwYHrUkEsHCX1woIYa3J/view?usp=sharing and move it inside weigths folder
 $ mkdir -p weights && mv mask_rcnn_car_damage.h5 weights/
 
 # 3. Run the service
