@@ -124,7 +124,31 @@ def get_json():
 @app.route("/api/predict", methods=["POST"])
 def api_predict():
     # … existing multipart / base64 handler …
-    ...
+    # -------- 1. Get the image --------
+    if request.content_type.startswith("multipart/form-data"):
+        file = request.files.get("image")
+        if file is None:
+            return jsonify(error="No image part in multipart request"), 400
+        image_np = _decode_to_ndarray(file)
+        want_img = request.form.get("return_image", "false").lower() == "true"
+    else:  # application/json
+        try:
+            data = request.get_json(force=True)
+            image_b64 = data["image"]
+        except (KeyError, TypeError):
+            return jsonify(error="JSON must contain 'image' (base64 string)"), 400
+        image_np = _decode_to_ndarray(image_b64)
+        want_img = bool(data.get("return_image", False))
+
+    # -------- 2. Run inference --------
+    r, detections = _run_detection(image_np)
+
+    # -------- 3. Prepare response --------
+    resp = {"detections": detections}
+    if want_img:
+        resp["annotated_image"] = _annotate(image_np, r)
+    return jsonify(resp), 200
+
 
 @app.route("/")
 def health():
