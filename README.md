@@ -31,7 +31,7 @@ $ pip install -r requirements.txt
 $ mkdir -p weights && mv mask_rcnn_car_damage.h5 weights/
 
 # 3. Run the service
-$ python api.py  # ⇒ http://localhost:5000
+$ python api.py  # ⇒ http://server_ip:5000
 ```
 
 Docker fan?
@@ -55,7 +55,7 @@ Returns an **annotated PNG**.
 
 ```bash
 curl -o out.png \
-  "http://localhost:5000/predict?image=/data/car.jpg"
+  "http://server_ip:5000/predict?image=/data/car.jpg"
 ```
 
 ---
@@ -65,7 +65,7 @@ curl -o out.png \
 Returns detections in JSON.
 
 ```bash
-curl "http://localhost:5000/json?image=/data/car.jpg"
+curl "http://server_ip:5000/json?image=/data/car.jpg"
 ```
 
 Response:
@@ -97,14 +97,14 @@ img_path = "tests/car.jpg"
 
 # 1) Get visualisation
 data = requests.get(
-    "http://localhost:5000/predict",
+    "http://server_ip:5000/predict",
     params={"image": img_path}, timeout=60
 ).content
 open("preview.png", "wb").write(data)
 
 # 2) Get raw detections
 resp = requests.get(
-    "http://localhost:5000/json",
+    "http://server_ip:5000/json",
     params={"image": img_path}, timeout=60
 ).json()
 print(resp)
