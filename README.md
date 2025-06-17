@@ -88,6 +88,10 @@ See [`api.py`](api.py) for the exact request/response schema.
 
 ---
 
+```bash
+curl -F image=@car.jpg -F return_image=true http://localhost:5000/api/predict
+```
+
 ## 🐍 Python usage
 
 ```python
